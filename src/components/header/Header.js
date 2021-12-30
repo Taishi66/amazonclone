@@ -1,5 +1,5 @@
 import React from "react";
-import "../Header.css";
+import "./Header.css";
 import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBasket from "@mui/icons-material/ShoppingBasket";
