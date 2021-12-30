@@ -2,6 +2,14 @@
   background-color: #131921;
   display: flex;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header__nav {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .header__logo {
@@ -9,9 +17,41 @@
   margin: 18px 10px 10px 19px;
   width: 100px;
 }
+
 .header__search {
   display: flex;
   flex: 1;
+}
+
+.header__link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.header__option {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.header__optionBasket {
+  display: flex;
+  align-items: center;
+}
+
+.header__basketCount {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.header__optionLineOne {
+  font-size: 10px;
+}
+
+.header__optionLineTwo {
+  font-size: 13px;
+  font-weight: 800;
 }
 
 .header__searchIcon {
