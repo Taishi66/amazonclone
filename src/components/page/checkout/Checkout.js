@@ -2,6 +2,8 @@ import React from "react";
 import { useStateValue } from "../../StateProvider/StateProvider";
 import "./Checkout.css";
 import CheckoutProduct from "../../checkoutProduct/CheckoutProduct";
+import SubTotal from "../../subtotal/SubTotal";
+
 
 function Checkout() {
   // eslint-disable-next-line no-unused-vars
@@ -42,7 +44,8 @@ function Checkout() {
         )}
       </div>
       {basket?.length > 0 && (
-        <div className="checkout__right">
+        <div className="checkout_right">
+          <SubTotal />
         </div>
       )}
     </div>
