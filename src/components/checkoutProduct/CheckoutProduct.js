@@ -1,6 +1,7 @@
 import React from 'react';
 import Star from "@mui/icons-material/Star";
 import "./CheckoutProduct.css";
+import SubTotal from "../subtotal/SubTotal";
 import { useStateValue } from "../StateProvider/StateProvider"
 
 
@@ -33,6 +34,11 @@ function CheckoutProduct({ id, title, price, image, rating }) {
                 </div>
                 <button onClick={removeFromBasket}>Remove from basket</button>
             </div>
+            {basket?.length > 0 && (
+                <div className="checkout_right">
+                    <SubTotal />
+                </div>
+            )}
         </div>
     )
 }
