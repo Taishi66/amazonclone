@@ -5,12 +5,12 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { StateProvider } from "./components/StateProvider/StateProvider";
-import {initialState} from "./components/StateProvider/reducer";
+import reducer, { initialState } from "./components/StateProvider/reducer";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <StateProvider initialState={initialState} reducer={}>
+      <StateProvider initialState={initialState} reducer={reducer}>
         <App />
       </StateProvider>
     </BrowserRouter>
