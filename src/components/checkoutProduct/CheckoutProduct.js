@@ -10,12 +10,12 @@ function CheckoutProduct({ id, title, price, image, rating }) {
     const removeFromBasket = () => {
         dispatch({
             type: "REMOVE_FROM_BASKET",
-            id: "id"
+            id,
         });
     }
     return (
         <div className="checkoutProduct">
-            <img src={image} alt="" />
+            <img className="checkoutProduct__image" src={image} alt="" />
             <div className="checkoutProduct__info">
                 <p className="checkoutProduct__title">{title}</p>
                 <p className="checkoutProduct__price">
@@ -33,7 +33,6 @@ function CheckoutProduct({ id, title, price, image, rating }) {
                 </div>
                 <button onClick={removeFromBasket}>Remove from basket</button>
             </div>
-
         </div>
     )
 }
