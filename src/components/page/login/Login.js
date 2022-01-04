@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./Login.css"
 import { Link, useNavigate } from 'react-router-dom'
-import firebaseAuth from "../../../firebase.js"
+import { firebaseAuth } from "../../../firebase.js"
 
 function Login() {
     const history = useNavigate();//react router v6 doesnt use useHistory anymore

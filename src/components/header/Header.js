@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBasket from "@mui/icons-material/ShoppingBasket";
 import { useStateValue } from "../StateProvider/StateProvider";
-import { getAuth } from "../../firebase"
+import { firebaseAuth } from "../../firebase"
 
 function Header() {
   const [{ basket, user }] = useStateValue();
@@ -12,7 +12,7 @@ function Header() {
 
   const login = () => {
     if (user) {
-      getAuth.signOut();
+      firebaseAuth.signOut();
     }
   };
 

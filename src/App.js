@@ -7,7 +7,7 @@ import Home from "./components/page/home/Home";
 import Checkout from "./components/page/checkout/Checkout";
 import Login from "./components/page/login/Login";
 import { useStateValue } from "./components/StateProvider/StateProvider";
-import firebaseAuth from "./firebase";
+import { firebaseAuth } from "./firebase";
 
 
 function App() {
