@@ -68,3 +68,8 @@
   border-bottom-left-radius: 4px;
   width: 100%;
 }
+
+.header__border:hover {
+  border: 1px solid white;
+  border-radius: 2px;
+}
