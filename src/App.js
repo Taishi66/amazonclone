@@ -7,15 +7,16 @@ import Home from "./components/page/home/Home";
 import Checkout from "./components/page/checkout/Checkout";
 import Login from "./components/page/login/Login";
 import { useStateValue } from "./components/StateProvider/StateProvider";
-import auth from "./firebase";
+import firebaseAuth from "./firebase";
 
 
 function App() {
 
-  const [dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
   //piece of code which runs based on a given condition
+
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChange(authUser => {
+    const unsubscribe = firebaseAuth.onAuthStateChanged(authUser => {
       if (authUser) {
         //the user is logged in
         dispatch({
@@ -34,8 +35,9 @@ function App() {
       //any clean up operations go in here
       unsubscribe();
     };
-  }, []);
+  }, [dispatch]);
 
+  console.log("USER IS >>", user);
 
 
   return (

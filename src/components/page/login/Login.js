@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./Login.css"
 import { Link, useNavigate } from 'react-router-dom'
-import { auth } from "../../../firebase.js"
+import firebaseAuth from "../../../firebase.js"
 
 function Login() {
     const history = useNavigate();//react router v6 doesnt use useHistory anymore
@@ -11,7 +11,7 @@ function Login() {
     const login = event => {
         event.preventDefault();//this stop the refresh
         //do the login logic
-        auth
+        firebaseAuth
             .signInWith(email, password)
             .then(auth => {
                 //logged in, redirect to homepage
@@ -23,7 +23,7 @@ function Login() {
     const register = event => {
         event.preventDefault();
         //do the login logic
-        auth
+        firebaseAuth
             .createUser(email, password)
             .then(auth => {
                 //create a user and logged in
