@@ -7,7 +7,7 @@ import Home from "./components/page/home/Home";
 import Checkout from "./components/page/checkout/Checkout";
 import Login from "./components/page/login/Login";
 import { useStateValue } from "./components/StateProvider/StateProvider";
-import { firebaseAuth } from "./firebase";
+import { auth } from "./firebase";
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
   //piece of code which runs based on a given condition
 
   useEffect(() => {
-    const unsubscribe = firebaseAuth.onAuthStateChanged(authUser => {
+    const unsubscribe = auth.onAuthStateChanged(authUser => {
       if (authUser) {
         //the user is logged in
         dispatch({

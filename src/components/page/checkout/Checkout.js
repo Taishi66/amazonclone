@@ -7,7 +7,7 @@ import SubTotal from "../../subtotal/SubTotal";
 
 function Checkout() {
   // eslint-disable-next-line no-unused-vars
-  const [{ basket }] = useStateValue();
+  const [{ basket, user }] = useStateValue();
 
 
   return (
@@ -22,13 +22,13 @@ function Checkout() {
           <div>
             <h2>Your Shopping Basket is Empty</h2>
             <p>
-              You have no items in your basket. To buy one or more items, click
+              Hi {user?.email},<br /> you have no items in your basket. To buy one or more items, click
               "Add to basket" next to the item.
             </p>
           </div>
         ) : (
           <div>
-            <h2 className="checkout_title">Your Shopping Basket</h2>
+            <h2 className="checkout_title">Hi {user?.email}, here's your Shopping Basket</h2>
             {/* List of all the products */}
             {basket?.map((item, index) => (
               <CheckoutProduct

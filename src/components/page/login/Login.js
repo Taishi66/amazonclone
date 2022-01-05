@@ -1,20 +1,21 @@
 import React, { useState } from 'react'
 import "./Login.css"
 import { Link, useNavigate } from 'react-router-dom'
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from '@firebase/auth';
+import { auth, signIn, createUser } from '../../../firebase';
 
 function Login() {
     const history = useNavigate();//react router v6 doesnt use useHistory anymore
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const auth = getAuth();
 
     const login = event => {
         event.preventDefault();//this stop the refresh
         //do the login logic
-        signInWithEmailAndPassword(auth, email, password)
+        auth
+            .signIn
             .then((auth) => {
                 console.log(auth);
+                const user = auth.user;
                 //logged in, redirect to homepage
                 // react v5 -> history.push('/');
                 if (auth) {
@@ -26,9 +27,10 @@ function Login() {
     const register = event => {
         event.preventDefault();
         //do the login logic
-        createUserWithEmailAndPassword(auth, email, password)
+        createUser
             .then((auth) => {
                 console.log(auth);
+                const user = auth.user;
                 //create a user and logged in
                 history('/', { replace: true });
             })
