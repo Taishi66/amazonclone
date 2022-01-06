@@ -36,7 +36,7 @@ function Login() {
                 console.log(auth);
                 const user = auth.user;
                 //create a user and logged in
-                history('/', { replace: true });
+                history('/');
             })
             .catch(error => alert(error.message));
     }

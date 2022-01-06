@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "../../StateProvider/reducer";
-import axios from "../../axios";
-
+import axios from "../../../axios";
+import { useNavigate } from "react-router-dom";
 
 function Payment() {
     // eslint-disable-next-line no-unused-vars
@@ -19,14 +19,17 @@ function Payment() {
     const [succeedeed, setSucceeded] = useState(false);
     const [processing, setProcessing] = useState("");
     const [clientSecret, setClientSecret] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         //generate the special stripe secret which allow us to charge a customer
         const getClientSecret = async () => {
             const response = await axios({
                 method: 'POST',
-                url: `payments/create?total=${getBasketTotal(basket)}`
+                //stripe expect a total in a currencies subunits like 10$ = 10,000 cents
+                url: `payments/create?total=${getBasketTotal(basket) * 100}`
             })
+            setProcessing(response.data.clientSecret);
         }
         getClientSecret();
     }, [basket])
@@ -37,7 +40,18 @@ function Payment() {
         setProcessing(true);
         //client secret
 
-        // const payload = await stripe
+        const payload = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: elements.getElement(CardElement)
+            }
+        }).then(({ paymentIntent }) => {
+            //paymentIntent = payement confirmation
+            setSucceeded(true);
+            setError(null);
+            setProcessing(false)
+
+            navigate('/orders', { replace: true });//replace so he cant go back to a payment page
+        })
     };
 
     const handleChange = (e) => {
@@ -46,6 +60,7 @@ function Payment() {
     };
 
     return (
+
         <div className='payment'>
             <div className='payment__container'>
                 <h1>
