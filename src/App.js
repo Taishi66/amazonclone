@@ -8,26 +8,25 @@ import Checkout from "./components/page/checkout/Checkout";
 import Login from "./components/page/login/Login";
 import { useStateValue } from "./components/StateProvider/StateProvider";
 import { auth } from "./firebase";
-import Payment from "./components/page/payment/Payment"
+import Payment from "./components/page/payment/Payment";
 
 function App() {
-
   const [{ user }, dispatch] = useStateValue();
   //piece of code which runs based on a given condition
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(authUser => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         //the user is logged in
         dispatch({
           type: "SET_USER",
-          user: authUser
+          user: authUser,
         });
       } else {
         //the user is logged out
         dispatch({
           type: "SET_USER",
-          user: null
+          user: null,
         });
       }
     });
@@ -38,7 +37,6 @@ function App() {
   }, [dispatch]);
 
   console.log("USER IS >>", user);
-
 
   return (
     <div className='app'>
