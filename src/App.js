@@ -8,7 +8,7 @@ import Checkout from "./components/page/checkout/Checkout";
 import Login from "./components/page/login/Login";
 import { useStateValue } from "./components/StateProvider/StateProvider";
 import { auth } from "./firebase";
-
+import Payment from "./components/page/payment/Payment"
 
 function App() {
 
@@ -48,6 +48,7 @@ function App() {
       <Routes>
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/payment' element={<Payment />} />
         {/*Bottom route is always the default route*/}
         <Route path='/' element={<Home />} />
       </Routes>

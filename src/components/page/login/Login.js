@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import "./Login.css"
 import { Link, useNavigate } from 'react-router-dom'
-import { auth, signIn, createUser } from '../../../firebase';
+// import { auth, signIn, createUser } from '../../../firebase'; =>> create an error 'cannot read property of "then"'
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+
+
 
 function Login() {
     const history = useNavigate();//react router v6 doesnt use useHistory anymore
@@ -11,8 +14,8 @@ function Login() {
     const login = event => {
         event.preventDefault();//this stop the refresh
         //do the login logic
-        auth
-            .signIn
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, email, password)
             .then((auth) => {
                 console.log(auth);
                 const user = auth.user;
@@ -27,7 +30,8 @@ function Login() {
     const register = event => {
         event.preventDefault();
         //do the login logic
-        createUser
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, email, password)
             .then((auth) => {
                 console.log(auth);
                 const user = auth.user;

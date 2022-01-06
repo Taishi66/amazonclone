@@ -22,7 +22,7 @@ function Checkout() {
           <div>
             <h2>Your Shopping Basket is Empty</h2>
             <p>
-              Hi {user?.email},<br /> you have no items in your basket. To buy one or more items, click
+              Hi {(user?.email) ? user.email : "Guest"},<br /> you have no items in your basket. To buy one or more items, click
               "Add to basket" next to the item.
             </p>
           </div>
