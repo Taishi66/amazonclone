@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Payment.css";
 import { useStateValue } from "../../StateProvider/StateProvider";
 import CheckoutProduct from "../../checkoutProduct/CheckoutProduct";
@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "../../StateProvider/reducer";
+import axios from "../../axios";
+
 
 function Payment() {
     // eslint-disable-next-line no-unused-vars
@@ -16,9 +18,26 @@ function Payment() {
     const [disable, setDisable] = useState(true);
     const [succeedeed, setSucceeded] = useState(false);
     const [processing, setProcessing] = useState("");
+    const [clientSecret, setClientSecret] = useState(true);
 
-    const handleSubmit = (e) => {
+    useEffect(() => {
+        //generate the special stripe secret which allow us to charge a customer
+        const getClientSecret = async () => {
+            const response = await axios({
+                method: 'POST',
+                url: `payments/create?total=${getBasketTotal(basket)}`
+            })
+        }
+        getClientSecret();
+    }, [basket])
 
+    //stop them to buy 5times for ex in a row
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setProcessing(true);
+        //client secret
+
+        // const payload = await stripe
     };
 
     const handleChange = (e) => {
@@ -79,6 +98,7 @@ function Payment() {
                                     <span>{processing ? <p>Procesing</p> : "Buy Now"}</span>
                                 </button>
                             </div>
+                            {error && <div>{error}</div>}
                         </form>
                     </div>
                 </div>
