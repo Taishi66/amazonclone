@@ -16,7 +16,7 @@ function Payment() {
     const elements = useElements();
     const [error, setError] = useState(null);
     const [disable, setDisable] = useState(true);
-    const [succeedeed, setSucceeded] = useState(false);
+    const [succeeded, setSucceeded] = useState(false);
     const [processing, setProcessing] = useState("");
     const [clientSecret, setClientSecret] = useState(true);
     const navigate = useNavigate();
@@ -29,7 +29,7 @@ function Payment() {
                 //stripe expect a total in a currencies subunits like 10$ = 10,000 cents
                 url: `payments/create?total=${getBasketTotal(basket) * 100}`
             })
-            setProcessing(response.data.clientSecret);
+            setClientSecret(response.data.clientSecret);
         }
         getClientSecret();
     }, [basket])
@@ -109,7 +109,7 @@ function Payment() {
                                     thousandSeparator={true}
                                     prefix={"$"}
                                 />
-                                <button disabled={processing || disable || succeedeed}>
+                                <button disabled={processing || disable || succeeded}>
                                     <span>{processing ? <p>Procesing</p> : "Buy Now"}</span>
                                 </button>
                             </div>
