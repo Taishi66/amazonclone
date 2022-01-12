@@ -8,6 +8,8 @@ import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "../../StateProvider/reducer";
 import axios from "../../../axios";
 import { useNavigate } from "react-router-dom";
+import { db } from "../../../firebase";
+
 
 function Payment() {
     // eslint-disable-next-line no-unused-vars
@@ -27,12 +29,16 @@ function Payment() {
             const response = await axios({
                 method: 'POST',
                 //stripe expect a total in a currencies subunits like 10$ = 10,000 cents
-                url: `payments/create?total=${getBasketTotal(basket) * 100}`
+                url: `/payments/create?total=${getBasketTotal(basket) * 100}`
             })
             setClientSecret(response.data.clientSecret);
         }
+
         getClientSecret();
     }, [basket])
+
+    console.log('the secret is >>>>', clientSecret);
+    console.log('👱', user)
 
     //stop them to buy 5times for ex in a row
     const handleSubmit = async (e) => {
@@ -46,9 +52,24 @@ function Payment() {
             }
         }).then(({ paymentIntent }) => {
             //paymentIntent = payement confirmation
+            db
+                .collection('users')
+                .doc(user?.uid)
+                .collection('orders')
+                .doc(paymentIntent.id)
+                .set({
+                    basket: basket,
+                    amount: paymentIntent.amount,
+                    created: paymentIntent.created
+                })
+
             setSucceeded(true);
             setError(null);
             setProcessing(false)
+
+            dispatch({
+                type: 'EMPTY_BASKET'
+            })
 
             navigate('/orders', { replace: true });//replace so he cant go back to a payment page
         })
