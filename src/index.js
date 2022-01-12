@@ -14,6 +14,8 @@ const promise = loadStripe(
 );
 
 ReactDOM.render(
+
+
   <React.StrictMode>
     <BrowserRouter>
       <StateProvider initialState={initialState} reducer={reducer}>
@@ -22,7 +24,7 @@ ReactDOM.render(
         </Elements>
       </StateProvider>
     </BrowserRouter>
-  </React.StrictMode>,
+  </React.StrictMode >,
   document.getElementById("root")
 );
 // If you want to start measuring performance in your app, pass a function

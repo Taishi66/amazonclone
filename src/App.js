@@ -11,6 +11,12 @@ import { auth } from "./firebase";
 import Payment from "./components/page/payment/Payment";
 
 function App() {
+
+  /*====================================================================================================*/
+  console.log('NEED TO UPGRADE TO FIREBASE BASE PLAN TO CONTINUE PROJECT & RESOLVE PAYMENT SOLUTION')
+  /*====================================================================================================*/
+
+
   const [{ user }, dispatch] = useStateValue();
   //piece of code which runs based on a given condition
 
